@@ -7,8 +7,8 @@ import androidx.paging.map
 import com.arrazyfathan.moviequ.data.mapper.toMovie
 import com.arrazyfathan.moviequ.domain.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository) :

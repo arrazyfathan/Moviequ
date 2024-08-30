@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.arrazyfathan.moviequ.data.local.entity.MovieEntity
-import com.arrazyfathan.moviequ.domain.Movie
 
 @Dao
 interface MovieDao {

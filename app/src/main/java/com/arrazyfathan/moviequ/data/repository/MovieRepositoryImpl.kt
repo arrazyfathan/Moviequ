@@ -11,9 +11,9 @@ import com.arrazyfathan.moviequ.data.paging.SearchPagingSource
 import com.arrazyfathan.moviequ.data.remote.api.OmdbApi
 import com.arrazyfathan.moviequ.domain.Movie
 import com.arrazyfathan.moviequ.domain.MovieRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalPagingApi::class)
 @Singleton

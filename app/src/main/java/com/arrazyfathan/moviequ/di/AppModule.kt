@@ -2,15 +2,11 @@ package com.arrazyfathan.moviequ.di
 
 import android.content.Context
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.arrazyfathan.moviequ.BuildConfig
 import com.arrazyfathan.moviequ.data.local.dao.MovieDao
 import com.arrazyfathan.moviequ.data.local.dao.RemoteKeyDao
 import com.arrazyfathan.moviequ.data.local.database.MovieDatabase
-import com.arrazyfathan.moviequ.data.local.entity.MovieEntity
-import com.arrazyfathan.moviequ.data.paging.MovieRemoteMediator
 import com.arrazyfathan.moviequ.data.remote.api.OmdbApi
 import com.arrazyfathan.moviequ.utils.CustomHttpLogger
 import com.google.gson.Gson
