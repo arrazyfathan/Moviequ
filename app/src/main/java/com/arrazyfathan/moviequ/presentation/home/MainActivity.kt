@@ -1,4 +1,4 @@
-package com.arrazyfathan.moviequ.ui.home
+package com.arrazyfathan.moviequ.presentation.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
