@@ -63,8 +63,10 @@ dependencies {
     implementation (libs.androidx.paging.compose)
 
     implementation (libs.retrofit)
-    implementation (libs.converter.moshi)
-    implementation (libs.logging.interceptor)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.gson)
 
     implementation (libs.androidx.room.ktx)
     kapt (libs.androidx.room.compiler)
