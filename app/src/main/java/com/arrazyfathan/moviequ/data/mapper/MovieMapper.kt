@@ -14,6 +14,16 @@ fun MovieDto.toMovieEntity(): MovieEntity {
     )
 }
 
+fun MovieDto.toDomain(): Movie {
+    return Movie(
+        imdbID = imdbID,
+        poster = poster,
+        title = title,
+        type = type,
+        year = year,
+    )
+}
+
 fun MovieEntity.toMovie(): Movie {
     return Movie(
         imdbID = imdbID,

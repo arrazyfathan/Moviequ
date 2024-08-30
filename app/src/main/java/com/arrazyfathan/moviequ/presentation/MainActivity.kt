@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.arrazyfathan.moviequ.presentation.home.HomeScreen
 import com.arrazyfathan.moviequ.presentation.home.HomeViewModel
 import com.arrazyfathan.moviequ.presentation.search.SearchScreen
+import com.arrazyfathan.moviequ.presentation.search.SearchViewModel
 import com.arrazyfathan.moviequ.ui.theme.MoviequTheme
 import com.arrazyfathan.moviequ.utils.Material3Transitions
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -65,7 +66,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     composable("search") {
-                        SearchScreen(modifier = Modifier.padding())
+                        val viewModel = hiltViewModel<SearchViewModel>()
+                        SearchScreen(searchViewModel = viewModel)
                     }
                 }
             }

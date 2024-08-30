@@ -88,23 +88,4 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRemoteKeysDao(moviesDatabase: MovieDatabase): RemoteKeyDao = moviesDatabase.getRemoteKeysDao()
-
-    @Provides
-    @Singleton
-    fun provideMoviePager(movieDb: MovieDatabase, movieApi: OmdbApi): Pager<Int, MovieEntity> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                prefetchDistance = 10,
-                initialLoadSize = 10
-            ),
-            remoteMediator = MovieRemoteMediator(
-                movieDb = movieDb,
-                movieApi = movieApi
-            ),
-            pagingSourceFactory = {
-                movieDb.getMoviesDao().pagingSource()
-            }
-        )
-    }
 }
