@@ -9,7 +9,7 @@ interface OmdbApi {
     @GET("/")
     fun searchMovies(
         @Query("apikey") apiKey: String = "790c82e",
-        @Query("s") searchQuery: String,
+        @Query("s") searchQuery: String = "friends",
         @Query("page") page: Int,
     ): MovieResponseDto
 
