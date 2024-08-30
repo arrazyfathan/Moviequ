@@ -10,7 +10,7 @@ import com.arrazyfathan.moviequ.data.local.dao.MovieDao
 import com.arrazyfathan.moviequ.data.local.dao.RemoteKeyDao
 import com.arrazyfathan.moviequ.data.local.database.MovieDatabase
 import com.arrazyfathan.moviequ.data.local.entity.MovieEntity
-import com.arrazyfathan.moviequ.data.remote.MovieRemoteMediator
+import com.arrazyfathan.moviequ.data.paging.MovieRemoteMediator
 import com.arrazyfathan.moviequ.data.remote.api.OmdbApi
 import com.arrazyfathan.moviequ.utils.CustomHttpLogger
 import com.google.gson.Gson
@@ -65,9 +65,9 @@ object AppModule {
     fun provideOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .connectTimeout(1, TimeUnit.HOURS)
-            .writeTimeout(1, TimeUnit.HOURS)
-            .readTimeout(1, TimeUnit.HOURS)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
             .build()
 
     @Provides

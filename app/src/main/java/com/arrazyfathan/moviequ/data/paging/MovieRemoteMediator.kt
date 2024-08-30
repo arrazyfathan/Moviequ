@@ -1,4 +1,4 @@
-package com.arrazyfathan.moviequ.data.remote
+package com.arrazyfathan.moviequ.data.paging
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
