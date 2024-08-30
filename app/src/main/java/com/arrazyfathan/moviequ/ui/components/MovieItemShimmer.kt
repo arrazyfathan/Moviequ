@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MovieItemShimmer() {
-    Column(modifier = Modifier.background(Color.White)) {
+    Column(modifier = Modifier.background(Color.White).padding(top = 8.dp)) {
         Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
             Box(
                 modifier =
@@ -61,7 +61,11 @@ fun MovieItemShimmer() {
             }
         }
         HorizontalDivider(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(
+                top = 8.dp,
+                start = 8.dp,
+                end = 8.dp,
+            ),
             color = Color.Black.copy(alpha = 0.1f),
             thickness = 0.7.dp,
         )

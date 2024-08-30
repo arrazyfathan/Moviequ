@@ -29,7 +29,7 @@ import com.arrazyfathan.moviequ.ui.theme.MoviequTheme
 
 @Composable
 fun MovieItem(movie: Movie, modifier: Modifier = Modifier) {
-    Column(modifier = Modifier.background(Color.White)) {
+    Column(modifier = Modifier.background(Color.White).padding(top = 8.dp)) {
         Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
             AsyncImage(
                 model = movie.poster,
@@ -50,7 +50,7 @@ fun MovieItem(movie: Movie, modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "Release Date: ${movie.year}",
-                    style = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal),
+                    style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Normal),
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Card(
@@ -70,7 +70,7 @@ fun MovieItem(movie: Movie, modifier: Modifier = Modifier) {
             }
         }
         HorizontalDivider(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(top = 8.dp, start = 8.dp, end = 8.dp),
             color = Color.Black.copy(alpha = 0.1f),
             thickness = 0.7.dp,
         )
