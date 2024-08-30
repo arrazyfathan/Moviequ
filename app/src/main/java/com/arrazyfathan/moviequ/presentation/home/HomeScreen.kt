@@ -104,7 +104,7 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
                             Icon(
                                 imageVector = Icons.Filled.Search,
                                 tint = Color.Black,
-                                contentDescription = "Localized description",
+                                contentDescription = null,
                             )
                         }
                     },
@@ -165,7 +165,7 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
                             Modifier.fillParentMaxSize()
                         }
                     Column(
-                        modifier = modifier,
+                        modifier = modifier.padding(horizontal = 16.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
@@ -184,7 +184,13 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
                         )
 
                         Button(
-                            onClick = { movies.refresh() },
+                            onClick = {
+                                if (isPaginatingError) {
+                                    movies.retry()
+                                } else {
+                                    movies.refresh()
+                                }
+                            },
                             content = { Text(text = "Retry") },
                             colors =
                                 ButtonDefaults.buttonColors(

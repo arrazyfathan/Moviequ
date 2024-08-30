@@ -66,9 +66,11 @@ class MovieRemoteMediator(
 
             MediatorResult.Success(endOfPaginationReached)
         } catch (e: IOException) {
-            MediatorResult.Error(e)
+            MediatorResult.Error(Exception("Network error: Unable to load movies. Please check your connection and try again."))
         } catch (e: HttpException) {
-            MediatorResult.Error(e)
+            MediatorResult.Error(Exception("Server error: Unable to load movies. Please try again later."))
+        } catch (e: Exception) {
+            MediatorResult.Error(Exception("Unexpected error: ${e.localizedMessage}"))
         }
     }
 
