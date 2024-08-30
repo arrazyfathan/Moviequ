@@ -23,12 +23,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
-import androidx.paging.compose.LazyPagingItems
-import com.arrazyfathan.moviequ.domain.Movie
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.arrazyfathan.moviequ.ui.components.MovieItem
 
 @Composable
-fun HomeScreen(movies: LazyPagingItems<Movie>, modifier: Modifier) {
+fun HomeScreen(
+    homeViewModel: HomeViewModel,
+    modifier: Modifier = Modifier
+) {
+    val movies = homeViewModel.moviePagingFlow.collectAsLazyPagingItems()
+    val loadState = movies.loadState.mediator
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -41,7 +46,6 @@ fun HomeScreen(movies: LazyPagingItems<Movie>, modifier: Modifier) {
             }
         }
 
-        val loadState = movies.loadState.mediator
         item {
             if (loadState?.refresh == LoadState.Loading) {
                 Column(

@@ -62,8 +62,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(route = "home") {
                             val viewMode = hiltViewModel<HomeViewModel>()
-                            val movie = viewMode.moviePagingFlow.collectAsLazyPagingItems()
-                            HomeScreen(movies = movie, modifier = Modifier.padding(innerPadding))
+                            HomeScreen(homeViewModel = viewMode, modifier = Modifier.padding(innerPadding))
                         }
                         composable("search") {}
                     }
