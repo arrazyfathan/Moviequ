@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface OmdbApi {
 
     @GET("/")
-    fun searchMovies(
+    suspend fun searchMovies(
         @Query("apikey") apiKey: String = "790c82e",
         @Query("s") searchQuery: String = "friends",
         @Query("page") page: Int,
@@ -15,6 +15,6 @@ interface OmdbApi {
 
 
     companion object {
-        const val BASE_URL = "http://www.omdbapi.com/"
+        const val BASE_URL = "https://www.omdbapi.com/"
     }
 }

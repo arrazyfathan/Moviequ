@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.arrazyfathan.moviequ.data.local.entity.MovieEntity
+import com.arrazyfathan.moviequ.domain.Movie
 
 @Dao
 interface MovieDao {
@@ -12,9 +13,9 @@ interface MovieDao {
     @Upsert
     suspend fun upsertAll(movies: List<MovieEntity>)
 
-    @Query("SELECT * FROM movieentity")
+    @Query("SELECT * FROM movie")
     fun pagingSource(): PagingSource<Int, MovieEntity>
 
-    @Query("DELETE FROM movieentity")
+    @Query("DELETE FROM movie")
     suspend fun clearAll()
 }

@@ -3,9 +3,9 @@ package com.arrazyfathan.moviequ.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "movie")
 data class MovieEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     val imdbID: String,
     val poster: String,
     val title: String,
