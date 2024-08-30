@@ -54,6 +54,21 @@ dependencies {
     kapt(libs.androidx.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    implementation(libs.coil.compose)
+
+    implementation (libs.androidx.lifecycle.runtime.compose)
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation (libs.androidx.paging.runtime.ktx)
+    implementation (libs.androidx.paging.compose)
+
+    implementation (libs.retrofit)
+    implementation (libs.converter.moshi)
+    implementation (libs.logging.interceptor)
+
+    implementation (libs.androidx.room.ktx)
+    kapt (libs.androidx.room.compiler)
+    implementation (libs.androidx.room.paging)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
