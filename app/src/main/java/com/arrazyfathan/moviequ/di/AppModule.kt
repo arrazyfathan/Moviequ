@@ -16,15 +16,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
-
-@OptIn(ExperimentalPagingApi::class)
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -43,11 +41,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideMovieDatabase(@ApplicationContext context: Context): MovieDatabase {
-        return Room.databaseBuilder(
-            context,
-            MovieDatabase::class.java,
-            "movie.db"
-        ).build()
+        return Room.databaseBuilder(context, MovieDatabase::class.java, "movie.db").build()
     }
 
     @Singleton
@@ -83,5 +77,6 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRemoteKeysDao(moviesDatabase: MovieDatabase): RemoteKeyDao = moviesDatabase.getRemoteKeysDao()
+    fun provideRemoteKeysDao(moviesDatabase: MovieDatabase): RemoteKeyDao =
+        moviesDatabase.getRemoteKeysDao()
 }
