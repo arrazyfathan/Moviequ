@@ -1,5 +1,6 @@
 package com.arrazyfathan.moviequ.data.remote.api
 
+import com.arrazyfathan.moviequ.BuildConfig
 import com.arrazyfathan.moviequ.data.remote.dto.MovieResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -8,7 +9,7 @@ interface OmdbApi {
 
     @GET("/")
     suspend fun searchMovies(
-        @Query("apikey") apiKey: String = "790c82e",
+        @Query("apikey") apiKey: String = BuildConfig.OMDB_API_KEY,
         @Query("s") searchQuery: String = "friends",
         @Query("page") page: Int,
     ): MovieResponseDto

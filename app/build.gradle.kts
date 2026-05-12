@@ -13,6 +13,16 @@ val keystorePropertiesFile = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
+val localPropertiesFile = rootProject.file("local.properties")
+val localProperties = Properties()
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+
+val omdbApiKey =
+    localProperties.getProperty("omdb.apiKey")
+        ?: error("Missing omdb.apiKey in local.properties")
+
 android {
     namespace = "com.arrazyfathan.moviequ"
     compileSdk = 37
@@ -23,6 +33,7 @@ android {
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "OMDB_API_KEY", "\"$omdbApiKey\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
