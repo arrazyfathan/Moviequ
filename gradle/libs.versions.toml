@@ -2,7 +2,7 @@
 agp = "8.5.2"
 coilCompose = "2.7.0"
 hiltAndroidTesting = "2.44"
-kotlin = "1.9.0"
+kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -66,4 +66,3 @@ hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroi
 
 [bundles]
 accompanist = ["accompanist-systemuicontroller"]
-
