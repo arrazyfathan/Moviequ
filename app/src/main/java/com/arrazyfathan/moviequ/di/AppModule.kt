@@ -1,7 +1,6 @@
 package com.arrazyfathan.moviequ.di
 
 import android.content.Context
-import androidx.paging.ExperimentalPagingApi
 import androidx.room.Room
 import com.arrazyfathan.moviequ.BuildConfig
 import com.arrazyfathan.moviequ.data.local.dao.MovieDao
@@ -16,12 +15,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,12 +28,11 @@ object AppModule {
 
     private val interceptor: HttpLoggingInterceptor by lazy {
         HttpLoggingInterceptor(CustomHttpLogger()).apply {
-            level =
-                if (BuildConfig.DEBUG) {
-                    HttpLoggingInterceptor.Level.BODY
-                } else {
-                    HttpLoggingInterceptor.Level.NONE
-                }
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
         }
     }
 
@@ -51,21 +49,14 @@ object AppModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(1, TimeUnit.MINUTES)
-            .build()
+        OkHttpClient.Builder().addInterceptor(interceptor).connectTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES).readTimeout(1, TimeUnit.MINUTES).build()
 
     @Provides
     @Singleton
     fun provideMovieApi(gson: Gson, okHttpClient: OkHttpClient): OmdbApi {
-        return Retrofit.Builder()
-            .baseUrl(OmdbApi.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(okHttpClient)
-            .build()
+        return Retrofit.Builder().baseUrl(OmdbApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson)).client(okHttpClient).build()
             .create(OmdbApi::class.java)
     }
 
