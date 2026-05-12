@@ -9,7 +9,8 @@ import com.arrazyfathan.moviequ.data.local.entity.RemoteKeys
 
 @Database(
     entities = [MovieEntity::class, RemoteKeys::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class MovieDatabase: RoomDatabase() {
     abstract fun getMoviesDao(): MovieDao

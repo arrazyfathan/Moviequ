@@ -4,11 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
-import androidx.core.view.WindowCompat
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,22 +15,14 @@ import com.arrazyfathan.moviequ.presentation.search.SearchScreen
 import com.arrazyfathan.moviequ.presentation.search.SearchViewModel
 import com.arrazyfathan.moviequ.ui.theme.MoviequTheme
 import com.arrazyfathan.moviequ.utils.Material3Transitions
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
         setContent {
-            val systemUiController = rememberSystemUiController()
-
-            SideEffect {
-                systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = true)
-            }
-
             MoviequTheme {
                 val navController = rememberNavController()
                 val density = LocalDensity.current
