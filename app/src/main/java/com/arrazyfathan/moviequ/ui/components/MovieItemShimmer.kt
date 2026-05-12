@@ -13,16 +13,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 
 @Composable
 fun MovieItemShimmer() {
-    Column(modifier = Modifier.background(Color.White).padding(top = 8.dp)) {
+    val colorScheme = MaterialTheme.colorScheme
+
+    Column(modifier = Modifier.background(colorScheme.background).padding(top = 8.dp)) {
         Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
             Box(
                 modifier =
@@ -50,6 +52,11 @@ fun MovieItemShimmer() {
 
                 Card(
                     elevation = CardDefaults.cardElevation(0.dp),
+                    colors =
+                        CardDefaults.cardColors(
+                            containerColor = colorScheme.secondaryContainer,
+                            contentColor = colorScheme.onSecondaryContainer,
+                        ),
                 ) {
                     Box(
                         modifier = Modifier
@@ -66,7 +73,7 @@ fun MovieItemShimmer() {
                 start = 8.dp,
                 end = 8.dp,
             ),
-            color = Color.Black.copy(alpha = 0.1f),
+            color = colorScheme.outlineVariant,
             thickness = 0.7.dp,
         )
     }

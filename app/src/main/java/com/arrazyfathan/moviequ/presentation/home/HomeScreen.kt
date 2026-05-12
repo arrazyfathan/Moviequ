@@ -23,6 +23,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -36,13 +37,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.arrazyfathan.moviequ.ui.components.MovieItem
@@ -54,6 +55,7 @@ import kotlinx.coroutines.launch
 fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}) {
     val movies = homeViewModel.moviePagingFlow.collectAsLazyPagingItems()
     val loadState = movies.loadState.mediator
+    val colorScheme = MaterialTheme.colorScheme
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scrollState = rememberLazyListState()
@@ -84,14 +86,16 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        containerColor = colorScheme.background,
         topBar = {
             Surface(shadowElevation = elevation) {
                 MediumTopAppBar(
                     colors =
                         TopAppBarDefaults.topAppBarColors(
-                            containerColor = Color.White,
-                            titleContentColor = Color.Black,
-                            scrolledContainerColor = Color.White,
+                            containerColor = colorScheme.surface,
+                            titleContentColor = colorScheme.onSurface,
+                            actionIconContentColor = colorScheme.onSurface,
+                            scrolledContainerColor = colorScheme.surface,
                         ),
                     title = {
                         Text(
@@ -103,7 +107,6 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
                         IconButton(onClick = onSearchBarClicked) {
                             Icon(
                                 imageVector = Icons.Filled.Search,
-                                tint = Color.Black,
                                 contentDescription = null,
                             )
                         }
@@ -117,8 +120,8 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
                 AnimatedVisibility(visible = showFab.value, enter = fadeIn(), exit = fadeOut()) {
                     FloatingActionButton(
                         onClick = { coroutineScope.launch { scrollState.animateScrollToItem(0) } },
-                        containerColor = Color.Black,
-                        contentColor = Color.White,
+                        containerColor = colorScheme.primary,
+                        contentColor = colorScheme.onPrimary,
                         shape = CircleShape,
                     ) {
                         Icon(
@@ -131,7 +134,11 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
         },
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize().background(Color.White).padding(innerPadding),
+            modifier =
+                Modifier.fillMaxSize()
+                    .background(colorScheme.background)
+                    .padding(innerPadding)
+                    .consumeWindowInsets(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             state = scrollState,
@@ -192,11 +199,7 @@ fun HomeScreen(homeViewModel: HomeViewModel, onSearchBarClicked: () -> Unit = {}
                                 }
                             },
                             content = { Text(text = "Retry") },
-                            colors =
-                                ButtonDefaults.buttonColors(
-                                    containerColor = Color.Black,
-                                    contentColor = Color.White,
-                                ),
+                            colors = ButtonDefaults.buttonColors(),
                         )
                     }
                 }

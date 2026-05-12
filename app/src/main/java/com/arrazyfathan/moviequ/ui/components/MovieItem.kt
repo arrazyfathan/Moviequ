@@ -12,11 +12,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +29,14 @@ import com.arrazyfathan.moviequ.ui.theme.MoviequTheme
 
 @Composable
 fun MovieItem(movie: Movie, modifier: Modifier = Modifier) {
-    Column(modifier = Modifier.background(Color.White).padding(top = 8.dp)) {
+    val colorScheme = MaterialTheme.colorScheme
+
+    Column(
+        modifier =
+            modifier
+                .background(colorScheme.background)
+                .padding(top = 8.dp)
+    ) {
         Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
             AsyncImage(
                 model = movie.poster,
@@ -46,19 +53,21 @@ fun MovieItem(movie: Movie, modifier: Modifier = Modifier) {
                 Text(
                     text = movie.title,
                     style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold),
+                    color = colorScheme.onBackground,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = "Release Date: ${movie.year}",
                     style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Normal),
+                    color = colorScheme.onSurfaceVariant,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Card(
                     elevation = CardDefaults.cardElevation(0.dp),
                     colors =
                         CardDefaults.cardColors(
-                            containerColor = Color.Black,
-                            contentColor = Color.White,
+                            containerColor = colorScheme.secondaryContainer,
+                            contentColor = colorScheme.onSecondaryContainer,
                         ),
                 ) {
                     Text(
@@ -71,7 +80,7 @@ fun MovieItem(movie: Movie, modifier: Modifier = Modifier) {
         }
         HorizontalDivider(
             modifier = Modifier.padding(top = 8.dp, start = 8.dp, end = 8.dp),
-            color = Color.Black.copy(alpha = 0.1f),
+            color = colorScheme.outlineVariant,
             thickness = 0.7.dp,
         )
     }

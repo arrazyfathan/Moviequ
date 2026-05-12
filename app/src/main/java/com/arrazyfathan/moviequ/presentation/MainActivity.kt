@@ -1,7 +1,9 @@
 package com.arrazyfathan.moviequ.presentation
 
+import android.graphics.Color as AndroidColor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.ui.platform.LocalDensity
@@ -21,7 +23,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle =
+                SystemBarStyle.auto(
+                    AndroidColor.TRANSPARENT,
+                    AndroidColor.TRANSPARENT,
+                ),
+            navigationBarStyle =
+                SystemBarStyle.auto(
+                    AndroidColor.TRANSPARENT,
+                    AndroidColor.TRANSPARENT,
+                ),
+        )
         setContent {
             MoviequTheme {
                 val navController = rememberNavController()

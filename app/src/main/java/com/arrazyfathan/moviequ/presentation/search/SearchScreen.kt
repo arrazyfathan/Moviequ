@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -36,7 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -52,14 +54,24 @@ fun SearchScreen(searchViewModel: SearchViewModel) {
     var query by remember { mutableStateOf("") }
     val movies = searchViewModel.movies.collectAsLazyPagingItems()
     val loadState = movies.loadState
+    val colorScheme = MaterialTheme.colorScheme
 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
     LaunchedEffect(Unit) { focusRequester.requestFocus() }
 
-    Scaffold(containerColor = Color.White, modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
+    Scaffold(
+        containerColor = colorScheme.background,
+        modifier = Modifier.fillMaxSize(),
+    ) { innerPadding ->
+        Column(
+            modifier =
+                Modifier.fillMaxSize()
+                    .padding(innerPadding)
+                    .consumeWindowInsets(innerPadding)
+                    .imePadding()
+        ) {
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
                 value = query,
@@ -72,15 +84,17 @@ fun SearchScreen(searchViewModel: SearchViewModel) {
                 singleLine = true,
                 colors =
                     TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Black.copy(0.1f),
-                        unfocusedContainerColor = Color.Black.copy(0.1f),
-                        disabledContainerColor = Color.Black.copy(0.1f),
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent,
-                        cursorColor = Color.Black,
-                        focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Black,
+                        focusedContainerColor = colorScheme.surfaceVariant,
+                        unfocusedContainerColor = colorScheme.surfaceVariant,
+                        disabledContainerColor = colorScheme.surfaceVariant,
+                        focusedIndicatorColor = colorScheme.primary.copy(alpha = 0.4f),
+                        unfocusedIndicatorColor = colorScheme.outline.copy(alpha = 0.2f),
+                        disabledIndicatorColor = colorScheme.outline.copy(alpha = 0.12f),
+                        cursorColor = colorScheme.primary,
+                        focusedTextColor = colorScheme.onSurface,
+                        unfocusedTextColor = colorScheme.onSurface,
+                        focusedPlaceholderColor = colorScheme.onSurfaceVariant,
+                        unfocusedPlaceholderColor = colorScheme.onSurfaceVariant,
                     ),
                 modifier =
                     Modifier.fillMaxWidth()
@@ -100,7 +114,7 @@ fun SearchScreen(searchViewModel: SearchViewModel) {
                                     }
                                 },
                             imageVector = Icons.Rounded.Close,
-                            tint = Color.Black.copy(0.8f),
+                            tint = colorScheme.onSurfaceVariant,
                             contentDescription = null,
                         )
                     }
@@ -112,7 +126,9 @@ fun SearchScreen(searchViewModel: SearchViewModel) {
             if (query.length > 3) {
                 LazyColumn(
                     modifier =
-                        Modifier.fillMaxSize().background(Color.White).padding(horizontal = 16.dp),
+                        Modifier.fillMaxSize()
+                            .background(colorScheme.background)
+                            .padding(horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
@@ -187,11 +203,7 @@ fun SearchScreen(searchViewModel: SearchViewModel) {
                                         }
                                     },
                                     content = { Text(text = "Retry") },
-                                    colors =
-                                        ButtonDefaults.buttonColors(
-                                            containerColor = Color.Black,
-                                            contentColor = Color.White,
-                                        ),
+                                    colors = ButtonDefaults.buttonColors(),
                                 )
                             }
                         }
